@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>HTML5 Layouts</title>
+	<script src="https://code.jquery.com/jquery-latest.js" type="text/javascript"></script>
+	<script src="layout.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="layout12.css" type="text/css">
+	<link class="loadcssfile" rel="stylesheet" href="layout1.css" type="text/css">
+	<link rel="stylesheet" href="font-awesome.css" type="text/css">
+	<meta name="viewport" content="width=device-width">
+	<style type="text/css">
+	.imgSrc {
+		width: 63px;
+		height: 50px;
+		position: absolute;
+	}
+	</style>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$(".layoutChange").on("change",function(){
+				$(".loadcssfile").attr("href",$(this).val()+".css");
+			});
+			
+			var images = ["image1","image2","image3","image4","image5","image6","image7","image8","image9","image10","image11","image12","image13","image14","image15","image16","image17","image18","image19","image20"];
+			var i=0;
+			setInterval(changeImg, 3000)
+			function changeImg(){
+				//$("#imagesGallery .img").attr("src","images/"+images[i]+".jpg").fadeOut(3000).fadeIn(3000);
+				i++;
+				if(i > (images.length-1)) {
+					i = 0;
+				}
+			}
+			
+			$("._number").on("keydown",function(e){
+				// Allow: backspace, delete, tab, escape, enter and .
+				if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+					 // Allow: Ctrl+A, Command+A
+					(e.keyCode == 65 && ( e.ctrlKey === true || e.metaKey === true ) ) || 
+					 // Allow: home, end, left, right, down, up
+					(e.keyCode >= 35 && e.keyCode <= 40)) {
+						 // let it happen, don't do anything
+						 return;
+				}
+				$(this).closest("div").find("span").remove();
+				// Ensure that it is a number and stop the keypress
+				if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+					$(this).closest("div").append("<span>please enter number</span>")
+					e.preventDefault();
+				} else {
+					$(this).closest("div").find("span").remove();
+				}
+			});
+			
+			//onhover get the current image
+			$(".navSection li").hover(function(){
+				var imgSrc = $(this).data("img");
+				$("<img class='imgSrc' src='"+imgSrc+"'>").appendTo($(this));
+			},function(){
+				$(this).find(".imgSrc").remove();
+			});
+			
+			// check browser, if we not supporting display a Message
+			
+			// Internet Explorer
+			if(document.all && !document.querySelector){
+				alert("we do not support this browser");
+			}
+			
+			//Chrome
+			var ch_browserName = navigator.userAgent.match(/Chrome.\d+/g);
+			if(ch_browserName) {
+				var ch_browserVersion = ch_browserName.toString().split("/")[1];
+				if(ch_browserVersion <= 31) {
+					alert("we do not support this browser "+ch_browserVersion);
+				}
+			}
+				
+			//Firefox
+			var ff_browserName = navigator.userAgent.match(/Firefox.\d+/g);
+			
+			if(ff_browserName) {
+				var ff_browserVersion = ff_browserName.toString().split("/")[1];
+				if(ff_browserVersion <= 36) {
+					alert("we do not support this browser "+ff_browserVersion);
+				}
+			}
+			
+			//Safari
+			var sf_browserName = navigator.userAgent.match(/Version.\d+/g);
+			
+			if(sf_browserName) {
+				var sf_browserVersion = sf_browserName.toString().split("/")[1];
+				if(sf_browserVersion <= 7) {
+					alert("we do not support this browser "+sf_browserVersion);
+				}
+			}
+			
+			
+		});
+	</script>
+</head>
+<body>
+	<div class="wrapper">
+		<header class="mainHeader">
+			<div class="headerLogo fleft"><i class="fa fa-car"></i></div>
+			<div class="headerTxt fleft"> City Gallery </div>
+		</header>
+		<nav>
+			<div class="navSection">Occasion
+				<ul class="navContent">
+					<li data-img="images/image1.jpg">
+						<a href="#">City Gallery Link 1 </a>
+						<i class="fa fa-asterisk" ></i>
+					</li>
+					<li data-img="images/image2.jpg">
+						<a href="#">City Gallery Link 2 </a>
+						<i class="fa  fa-bolt" ></i>
+					</li>
+					<li data-img="images/image3.jpg">
+						<a href="#">City Gallery Link 3 </a>
+						<i class="fa fa-bug" ></i>
+					</li>
+					<li data-img="images/image4.jpg">
+						<a href="#">City Gallery Link 4 </a>
+						<i class="fa  fa-camera" ></i>
+					</li>
+				</ul>
+			</div>
+			
+			<div class="navSection">Delivery
+				<ul class="navContent">
+					<li data-img="images/image6.jpg">
+						<a href="#">City Gallery Link 1 </a>
+						<i class="fa fa-asterisk" ></i>
+					</li>
+					<li data-img="images/image8.jpg">
+						<a href="#">City Gallery Link 2 </a>
+						<i class="fa  fa-bolt" ></i>
+					</li>
+					<li data-img="images/image7.jpg">
+						<a href="#">City Gallery Link 3 </a>
+						<i class="fa fa-bug" ></i>
+					</li>
+					<li data-img="images/image1.jpg">
+						<a href="#">City Gallery Link 4 </a>
+						<i class="fa  fa-camera" ></i>
+					</li>
+				</ul>
+			</div>
+			
+			<div class="navSection">Range1
+				<ul class="navContent">
+					<li data-img="images/image3.jpg">
+						<a href="#">City Gallery Link 1 </a>
+						<i class="fa fa-asterisk" ></i>
+					</li>
+					<li data-img="images/image2.jpg">
+						<a href="#">City Gallery Link 2 </a>
+						<i class="fa  fa-bolt" ></i>
+					</li>
+					<li data-img="images/image9.jpg">
+						<a href="#">City Gallery Link 3 </a>
+						<i class="fa fa-bug" ></i>
+					</li>
+					<li data-img="images/image11.jpg">
+						<a href="#">City Gallery Link 4 </a>
+						<i class="fa  fa-camera" ></i>
+					</li>
+				</ul>
+			</div>
+			
+			<div class="navSection">Range2
+				<ul class="navContent">
+					<li data-img="images/image5.jpg">
+						<a href="#">City Gallery Link 1 </a>
+						<i class="fa fa-asterisk" ></i>
+					</li>
+					<li data-img="images/image6.jpg">
+						<a href="#">City Gallery Link 2 </a>
+						<i class="fa  fa-bolt" ></i>
+					</li>
+					<li data-img="images/image2.jpg">
+						<a href="#">City Gallery Link 3 </a>
+						<i class="fa fa-bug" ></i>
+					</li>
+					<li data-img="images/image7.jpg">
+						<a href="#">City Gallery Link 4 </a>
+						<i class="fa  fa-camera" ></i>
+					</li>
+				</ul>
+			</div>
+			<div class="navSection">Range3
+				<ul class="navContent">
+					<li data-img="images/image16.jpg">
+						<a href="#">City Gallery Link 1 </a>
+						<i class="fa fa-asterisk" ></i>
+					</li>
+					<li data-img="images/image18.jpg">
+						<a href="#">City Gallery Link 2 </a>
+						<i class="fa  fa-bolt" ></i>
+					</li>
+					<li data-img="images/image17.jpg">
+						<a href="#">City Gallery Link 3 </a>
+						<i class="fa fa-bug" ></i>
+					</li>
+					<li data-img="images/image11.jpg">
+						<a href="#">City Gallery Link 4 </a>
+						<i class="fa  fa-camera" ></i>
+					</li>
+				</ul>
+			</div>
+			
+		</nav>
+		<div>
+			<input type="text" class="two _number" placeholder="list price" id="skuDTO.listPrice" name="skuDTO.listPrice" value="">
+		</div>
+		<section>
+			<article>
+				<header class="subHeader"><h3> London </h3> </header>
+				<p>London is the capital city of England. It is the most populous city in the United Kingdom, with a metropolitan area of over 13 million inhabitants.London is the capital city of England. It is the most populous city in the United Kingdom, with a metropolitan area of over 13 million inhabitants.Standing on the River Thames, London has been a major settlement for two millennia, its history going back to its founding by the Romans, who named it Londinium.</p>
+				<p>Standing on the River Thames, London has been a major settlement for two millennia, its history going back to its founding by the Romans, who named it Londinium.</p>
+			</article>
+			<div id="layoutChange">
+				<label>Change the layout</label>
+				<div>
+				<select name="layout" class="layoutChange">
+					<option value="layout1">Select value</option>
+					<option value="layout1">Layout1</option>
+					<option value="layout2">Layout2</option>
+				</select>
+				</div>
+			</div>
+			<div id="imagesGallery">
+				<ul>
+					<li class="imgLi"><img class="img" src="images/image1.jpg" alt="image1"></li>
+				</ul>
+			</div>
+			<hr>
+			<div id="gridLayout">
+				<div>
+					<img src="images/cap1.jpg" alt="cap1">
+					<div>Cap 1</div>
+					<div>
+						<input type="button" value="ADD To Cart"/>
+					</div>
+				</div>
+				<div>
+					<img src="images/cap2.jpg" alt="cap2">
+					<div>Cap 2</div>
+					<div>
+						<input type="button" value="ADD To Cart"/>
+					</div>
+				</div>
+				<div>
+					<img src="images/cap3.jpg" alt="cap3">
+					<div>Cap 3</div>
+					<div>
+						<input type="button" value="ADD To Cart"/>
+					</div>
+				</div>
+				<div>
+					<img src="images/shoe.jpg" alt="shoe">
+					<div>Shoe</div>
+					<div>
+						<input type="button" value="ADD To Cart"/>
+					</div>
+				</div>
+			</div>
+		</section>
+		<div class="clrDiv">
+		
+		</div>
+		<footer>
+			Copyright © W3Schools.com
+		</footer>
+	</div>
+	<div class="modal">
+	
+	</div>
+</body>
+</html>
